@@ -1,7 +1,22 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { GalleryVerticalEnd } from "lucide-react";
 
+
+//funçao nova que le o token do cookie
+function getToken() {
+  return document.cookie
+    .split("; ")
+    .find((c) => c.startsWith("@pitang/accessToken="))
+    ?.split("=")[1];
+}
+
 export const Route = createFileRoute("/_auth")({
+  //bloco novo: roda antes de carregar a página
+  beforeLoad: () => {
+    if (getToken()) {
+      throw redirect({ to: "/dashboard" });
+    }
+  },
   component: RouteComponent,
 });
 

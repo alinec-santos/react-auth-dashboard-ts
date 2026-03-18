@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuAction,
   SidebarMenuButton,
@@ -20,6 +19,7 @@ import {
   ShareIcon,
   Trash2Icon,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router"; //import novo
 
 export function NavProjects({
   projects,
@@ -36,7 +36,8 @@ export function NavProjects({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton render={<a href={item.url} />}>
+            {/* link do TanStack = navegaçao SPA sem reload*/}
+            <SidebarMenuButton render={<Link to={item.url as any} />}>
               {item.icon}
               <span>{item.name}</span>
             </SidebarMenuButton>

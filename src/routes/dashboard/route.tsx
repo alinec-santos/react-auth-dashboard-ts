@@ -1,9 +1,13 @@
-import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  redirect,
+  useLocation,
+} from "@tanstack/react-router";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -16,7 +20,22 @@ import {
 } from "@/components/ui/sidebar";
 import { Fragment } from "react/jsx-runtime";
 
+
+//funçao nova que le o token do cookie
+function getToken() {
+  return document.cookie
+    .split("; ")
+    .find((c) => c.startsWith("@pitang/accessToken="))
+    ?.split("=")[1];
+}
+
 export const Route = createFileRoute("/dashboard")({
+  //bloco novo: roda antes de carregar  a pagina 
+  beforeLoad: () => {
+    if (!getToken()) {
+      throw redirect({ to: "/login" });
+    }
+  },
   component: RouteComponent,
 });
 
@@ -43,7 +62,8 @@ function RouteComponent() {
                   const lastPath = index + 1 === paths.length;
 
                   return (
-                    <Fragment>
+                    //tambem corrigimos o FRAGMENTE dentro do map - add key={path}
+                    <Fragment key={path}>
                       <BreadcrumbItem>
                         <BreadcrumbPage
                           className={`capitalize ${lastPath ? "font-bold" : ""}`}

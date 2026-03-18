@@ -28,7 +28,12 @@ export interface LoggedUser {
   crypto: Crypto;
   role: string;
 }
-
+export interface Todo {
+  id: number;
+  todo: string;
+  completed: boolean;
+  userId: number;
+}
 export interface Hair {
   color: string;
   type: string;
