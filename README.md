@@ -1,73 +1,122 @@
-# React + TypeScript + Vite
+# Pitang App 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido durante o treinamento da **Pitang**, como exercício prático das aulas, abordando os conceitos de `useState`, `useEffect` e HTTP Requests com `fetch`.
 
-Currently, two official plugins are available:
+ **[Acessar o projeto ao vivo](https://react-auth-dashboard-ts.vercel.app/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+##  Demonstração
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+[![Demonstração do projeto](https://img.shields.io/badge/▶️%20Assistir%20demonstração-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Im_TdrXj2JQ)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+##  Funcionalidades
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Obrigatórias
+-  **Landing page** na rota `/` com navegação para login e cadastro
+-  **Redirecionamento para `/dashboard`** caso o usuário já esteja logado ao tentar acessar `/login` ou `/register`
+-  **Redirecionamento para `/login`** caso o usuário não esteja logado ao tentar acessar `/dashboard`
+-  **Correção da navegação SPA** no sidebar — sem reload de página ao navegar
+
+### Extras
+-  Página inicial do dashboard com boas-vindas e dados do usuário logado
+-  Página de **Usuários** buscando dados da API
+-  Página de **Todos** buscando dados da API com status de concluído/pendente
+
+---
+
+##  Tecnologias utilizadas
+
+| Tecnologia | Descrição |
+|---|---|
+| [React](https://react.dev/) | Biblioteca principal para construção da interface |
+| [TypeScript](https://www.typescriptlang.org/) | Tipagem estática para JavaScript |
+| [Vite](https://vitejs.dev/) | Ferramenta de build e servidor de desenvolvimento |
+| [TanStack Router](https://tanstack.com/router) | Roteamento baseado em arquivos para React |
+| [shadcn/ui](https://ui.shadcn.com/) | Componentes de interface prontos e customizáveis |
+| [Tailwind CSS](https://tailwindcss.com/) | Framework de estilização via classes utilitárias |
+| [Lucide React](https://lucide.dev/) | Biblioteca de ícones |
+| [DummyJSON](https://dummyjson.com/) | API pública utilizada para dados fictícios |
+
+---
+
+##  Credenciais de teste
+
+Para acessar o dashboard, utilize as seguintes credenciais:
+
+```
+Usuário: emilys
+Senha:   emilyspass
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+##  Como rodar localmente
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/) instalado
+- [Git](https://git-scm.com/) instalado
+
+### Passo a passo
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+
+# 2. Acesse a pasta do projeto
+cd pitang-app
+
+# 3. Instale as dependências
+npm install
+
+# 4. Inicie o servidor de desenvolvimento
+npm run dev
 ```
+
+O projeto estará disponível em `http://localhost:5173`
+
+---
+
+##  Estrutura do projeto
+
+```
+src/
+├── routes/
+│   ├── index.tsx              # Landing page (/)
+│   ├── _auth/
+│   │   ├── route.tsx          # Layout de autenticação + guard de redirecionamento
+│   │   ├── login.tsx          # Página de login (/login)
+│   │   └── register.tsx       # Página de cadastro (/register)
+│   └── dashboard/
+│       ├── route.tsx          # Layout do dashboard + guard de autenticação
+│       ├── index.tsx          # Página inicial do dashboard (/dashboard)
+│       ├── products/
+│       │   └── index.tsx      # Listagem de produtos (/dashboard/products)
+│       ├── users/
+│       │   └── index.tsx      # Listagem de usuários (/dashboard/users)
+│       └── todos/
+│           └── index.tsx      # Listagem de todos (/dashboard/todos)
+├── components/
+│   ├── ui/                    # Componentes gerados pelo shadcn/ui
+│   ├── app-sidebar.tsx        # Sidebar da aplicação
+│   ├── login-form.tsx         # Formulário de login
+│   └── nav-projects.tsx       # Links de navegação da sidebar
+├── hooks/
+│   └── use-auth.ts            # Lógica de autenticação centralizada
+├── lib/
+│   └── api.ts                 # Funções de chamada à API
+└── types.ts                   # Tipos TypeScript da aplicação
+```
+
+---
+
+##  Autora
+
+Funcionalides citadas acima feitas  por **Aline Santos**. Projeto base desenvolvido pelo instrutor do treinamento Pitang 2026.
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alinec-santos)
