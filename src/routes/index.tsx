@@ -12,7 +12,7 @@ function RouteComponent() {
     <div
       className="min-h-screen text-white flex flex-col items-center justify-center gap-8 px-4"
       style={{
-        backgroundColor: "#0f172a",
+        backgroundColor: "#f23c32",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "600px",
@@ -26,7 +26,7 @@ function RouteComponent() {
           alt="Pitang Logo"
           style={{ width: "180px", filter: "brightness(0) invert(1)" }}
         />
-        <p className="text-slate-400 text-lg text-center max-w-sm">
+        <p className="text-white text-lg text-center max-w-sm">
           Gerencie produtos, usuários e muito mais em um só lugar.
         </p>
       </div>
@@ -35,13 +35,13 @@ function RouteComponent() {
       <div className="flex gap-4">
         <Link
           to="/login"
-          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-medium transition-colors"
+          className="px-6 py-3 bg-red-600 hover:bg-red-500 rounded-xl font-medium transition-colors"
         >
           Entrar
         </Link>
         <Link
           to="/register"
-          className="px-6 py-3 border border-slate-600 hover:border-slate-400 rounded-xl font-medium transition-colors"
+          className="px-6 py-3 bg-red-600 hover:bg-red-500 rounded-xl font-medium transition-colors"
         >
           Criar conta
         </Link>
